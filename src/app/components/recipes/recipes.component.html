@@ -1,0 +1,18 @@
+<h1>Recetas | <small>Novedades</small></h1>
+<hr>
+<div class="card-columns animated fadeIn fast">
+  <div class="card" *ngFor="let recipe of recipes; let i = index">
+    <img class="card-img-top img-fluid" src="assets/img/plato.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ recipe.name }}</h5>
+      <p class="card-text"> {{ recipe.description }} </p>
+      <button type="button" class="btn btn-outline-info" (click)="showRecipe(recipe.recipeId)">
+        Ver más...
+      </button>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div>
+

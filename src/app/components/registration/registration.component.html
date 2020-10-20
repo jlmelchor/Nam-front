@@ -1,0 +1,34 @@
+<div class="card">
+  <h5 class="card-header info-color white-text text-center py-4">
+    <strong>Únete a la comunidad Ñam</strong>
+  </h5>
+  <div class="card-body px-lg-5 pt-10 mt-4">
+    <form class="text-center" style="color: #757575" [formGroup]="form">
+      <div class="form-row">
+        <div class="col">
+          <div class="md-form">
+            <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+          </div>
+        </div>
+        <div class="col">
+          <div class="md-form">
+            <input type="text" class="form-control" placeholder="Apellidos" formControlName="surname">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div class="md-form mt-4">
+            <input type="email" class="form-control" placeholder="E-mail" formControlName="email">
+          </div>
+        </div>
+        <div class="col">
+          <div class="md-form mt-4">
+            <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" (click)="submit()">Enviar</button>
+    </form>
+  </div>
+</div>

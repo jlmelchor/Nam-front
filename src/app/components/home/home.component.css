@@ -1,0 +1,26 @@
+.container {
+  max-width: 960px;
+}
+.header {
+  position: relative;
+  overflow: hidden;
+  max-height: 300px;
+  padding: 3rem;
+  text-align: center;
+}
+.body {
+  width: 100%;
+}
+.body {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    flex: 1;
+  }
+}
+
+.overflow-hidden { overflow: hidden; }
+

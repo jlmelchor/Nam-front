@@ -1,0 +1,25 @@
+<div class="card">
+  <h5 class="card-header info-color white-text text-center py-4">
+    <strong>Inicia sesión</strong>
+  </h5>
+  <div class="card-body px-lg-5 pt-10 mt-4">
+    <form class="text-center" style="color: #757575" [formGroup]="form">
+      <div class="form-row">
+        <input type="email" class="form-control mb-4" placeholder="E-mail" formControlName="email">
+      </div>
+      <div class="form-row">
+        <input type="password" class="form-control mb-4" placeholder="Contraseña" formControlName="password">
+      </div>
+      <div class="d-flex justify-content-around">
+        <div>
+          <a class = "link" (click)="rememberPassword()">¿Has olvidado la contraseña?</a>
+        </div>
+      </div>
+      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" (click)="submit()">Enviar</button>
+    </form>
+    <!-- Register -->
+    <p align="center">¿No tienes cuenta? Regístrate
+      <a class = "link" (click)="goRegistrationPage()">aquí</a>
+    </p>
+  </div>
+</div>
