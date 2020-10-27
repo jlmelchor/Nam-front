@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService, Recipe } from '../../services/recipes.service';
+import { RecipesService } from '../../services/recipes.service';
 import { Router } from '@angular/router';
-import {RecipeService} from '../../services/recipe.service';
+import { RecipeService } from '../../services/recipe.service';
+import {LoginService} from '../../services/login.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-heroes',
@@ -10,23 +12,68 @@ import {RecipeService} from '../../services/recipe.service';
 })
 export class RecipesComponent implements OnInit {
 
-  recipes: Recipe[] = [];
+  public recipes = [];
+  public formData: any = new FormData();
+  public form = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  });
 
   constructor(
     private recipesService: RecipesService,
     private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) { }
 
 
   ngOnInit() {
-    this.recipes = this.recipesService.getRecipes();
+    this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
+      recipes => {
+        if (recipes !== null) {
+          this.recipes = recipes;
+        }
+      }
+    );
   }
 
-  showRecipe(recipeId: number) {
-    this.recipeService.recipeId = recipeId;
-    this.router.navigate( ['/recipe', recipeId] );
+  showRecipe(recipe: any) {
+    this.recipeService.recipe = recipe;
+    this.router.navigate( ['/recipe', recipe.recipeId] );
+  }
 
+  addFav(recipeId: number) {
+    this.formData.append('userId', sessionStorage.getItem('userId'));
+    this.formData.append('recipeId', recipeId);
+    this.recipeService.addFav(this.formData).subscribe(
+      recipe => {
+        if (recipe !== null) {
+          this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
+            recipes => {
+              this.recipes = recipes;
+              this.formData = new FormData();
+            }
+          );
+        }
+      }
+    );
+  }
+
+  quitFav(recipeId: number) {
+    this.formData.append('userId', sessionStorage.getItem('userId'));
+    this.formData.append('recipeId', recipeId);
+    this.recipeService.quitFav(this.formData).subscribe(
+      recipe => {
+        if (recipe !== null) {
+          this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
+            recipes => {
+              this.recipes = recipes;
+              this.formData = new FormData();
+            }
+          );
+        }
+      }
+    );
   }
 
 }

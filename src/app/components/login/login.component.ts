@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LoginService } from './login.service';
-import {GenericModalComponent} from '../shared/modals/generic-modal/generic-modal.component';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 
 
@@ -13,8 +11,6 @@ import swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public user: any;
-  private invalidUser = false;
   formData: any = new FormData();
   form = new FormGroup({
     email: new FormControl(''),
@@ -22,7 +18,6 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    // public dialog: MatDialog,
     private router: Router,
     private loginService: LoginService
   ) { }
@@ -60,6 +55,8 @@ export class LoginComponent implements OnInit {
             icon: 'success',
             title: 'Hola ' + user.name
           });
+          // Guardamos los datos del usuario en la sesión
+          sessionStorage.setItem('userId', JSON.stringify(user.userId));
           this.router.navigate( ['/recipes'] );
         } else {
           // Si el usuario no existe, borramos los datos del formulario y mostramos mensaje al usuario

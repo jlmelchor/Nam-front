@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="content">
+    <h2>¿Qué comemos hoy?</h2>
+    <h6>Echa un vistazo a tu frigorífico y/o despensa, dinos qué ingredientes tienes y nosotros
+      nos encargamos del resto.
+    </h6>
+
+    <div class="card-container">
+      <select placeholder="Selecciona categoría" [(ngModel)]="selectedFamily" (change)="selectFamily($event.target.value)" class="btn btn-info dropdown-toggle">
+        <option>--Selecciona categoría--</option>
+        <option *ngFor="let family of Families">{{family.name}}</option>
+      </select>
+    </div>
+
+    <div class="card-container">
+      <select placeholder="Selecciona ingredientes" class="btn btn-outline-info dropdown-toggle" (change)="selectIng($event.target.value)">
+        <option>--Selecciona ingredientes--</option>
+        <option *ngFor="let ingredient of ingredients">{{ingredient.name}}</option>
+      </select>
+    </div>
+
+    <hr>
+
+    <mat-chip-list #chipList aria-label="Food selection"  [hidden]="foodList.length === 0" class="col-md-8">
+      <mat-chip *ngFor="let ing of foodList" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(ing)" class="badge badge-pill badge-info">
+        {{ ing }}
+        <mat-icon class="mb-1" matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <!-- <input placeholder="New fruit..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)"> -->
+    </mat-chip-list>
+    <hr>
+    <button type="button" class="btn btn-outline-info btn-lg btn-block" [hidden]="foodList.length === 0" (click)="submit()">Listo</button>
+
+  </div>
+</div>

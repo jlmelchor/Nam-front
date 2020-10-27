@@ -2,15 +2,24 @@
 <hr>
 <div class="card-columns animated fadeIn fast">
   <div class="card" *ngFor="let recipe of recipes; let i = index">
+    <button mat-icon-button class="button m-2" aria-label="Añadir a favoritos">
+      <mat-icon *ngIf="recipe.isFav === 'Y'" color="warn" (click)="quitFav(recipe.recipeId)" matTooltip="Quitar de favoritos">favorite</mat-icon>
+      <mat-icon class="heart" *ngIf="recipe.isFav === 'N' || recipe.isFav === null" (click)="addFav(recipe.recipeId)" matTooltip="Añadir a favoritos">favorite</mat-icon>
+    </button>
     <img class="card-img-top img-fluid" src="assets/img/plato.png" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{ recipe.name }}</h5>
-      <p class="card-text"> {{ recipe.description }} </p>
-      <button type="button" class="btn btn-outline-info" (click)="showRecipe(recipe.recipeId)">
+      <p class="card-text description"> {{ recipe.description }} </p>
+      <button type="button" class="btn btn-outline-info" (click)="showRecipe(recipe)">
         Ver más...
       </button>
     </div>
     <div class="card-footer">
+      <p>
+        <span class="badge badge-pill badge-info mr-3">
+        {{ recipe.category.name }}
+        </span>
+      </p>
       <small class="text-muted">Last updated 3 mins ago</small>
     </div>
   </div>

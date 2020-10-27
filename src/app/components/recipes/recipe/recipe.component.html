@@ -2,13 +2,24 @@
 <hr>
 <div class="row">
   <div class="col-md-4">
-    <img class="card-img-top img-fluid" src="{{ recipe.img }}" alt="Card image cap">
+    <img class="card-img-top img-fluid" src="assets/img/plato.png" alt="Card image cap">
   </div>
 
   <div class="col-md-8">
     <h5 class="card-title">Ingredientes</h5>
     <span class="badge badge-pill badge-info mr-3" *ngFor="let ing of recipe.ingredients">
-      {{ ing }}
+      {{ ing.name }}
+    </span>
+    <hr>
+    <h5 class="card-title">Etiquetas</h5>
+    <span class="badge badge-pill mr-3 glutenFree" *ngIf="glutenFree === true">
+      Sin gluten
+    </span>
+    <span class="badge badge-pill mr-3 vegetarian" *ngIf="vegetarian === true">
+      Apta para vegetarianos
+    </span>
+    <span class="badge badge-pill mr-3 vegan" *ngIf="vegan === true">
+      Apta para veganos
     </span>
     <hr>
     <h5 class="card-title">Descripción</h5>

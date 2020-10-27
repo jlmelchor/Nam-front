@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
+  public user: any;
+
   constructor(
     private httpClient: HttpClient
   ) { }

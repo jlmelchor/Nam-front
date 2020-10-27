@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Heroe, RecipesService} from '../../services/recipes.service';
+import { RecipesService } from '../../services/recipes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -9,16 +9,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HeroeComponent {
 
-  heroes: Heroe[] = [];
-
   constructor(
     private heroesService: RecipesService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {
-    this.activatedRoute.params.subscribe( params => {
+    /*this.activatedRoute.params.subscribe( params => {
       this.heroes = heroesService.getHeroe(params['id']);
-    });
+    });*/
   }
 
 }
