@@ -30,6 +30,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatChipsModule,
     MatIconModule,
     MatButtonToggleModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTooltipModule
   ],
   providers: [
     RecipesService

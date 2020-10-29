@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit {
           });
           // Guardamos los datos del usuario en la sesión
           sessionStorage.setItem('userId', JSON.stringify(user.userId));
+          this.loginService.user.emit(sessionStorage.setItem('userId', JSON.stringify(user.userId)));
+          this.loginService.reload.emit(true);
           this.router.navigate( ['/recipes'] );
         } else {
           // Si el usuario no existe, borramos los datos del formulario y mostramos mensaje al usuario

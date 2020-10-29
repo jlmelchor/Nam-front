@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -8,11 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  public user: any;
+  public userId = new EventEmitter<any>();
+  public reloadNavBar = new EventEmitter<any>();
 
   constructor(
     private httpClient: HttpClient
   ) { }
+
+  get reload(): EventEmitter<any> {
+    return this.reloadNavBar;
+  }
+
+  get user(): EventEmitter<any> {
+    return this.userId;
+  }
 
   logIn(formData): Observable<any> {
     return this.httpClient.post('http://localhost:8080/login', formData, {
