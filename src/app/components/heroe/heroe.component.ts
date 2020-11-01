@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RecipesService } from '../../services/recipes.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-heroe',

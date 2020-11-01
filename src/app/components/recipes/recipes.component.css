@@ -18,3 +18,7 @@
 .heart {
   color: #EAEDED;
 }
+
+.card-columns {
+  column-count: 3;
+}

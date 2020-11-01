@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RecipesService } from '../../services/recipes.service';
 import { Router } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
-import {LoginService} from '../../services/login.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import { LoginService } from '../../services/login.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-heroes',
@@ -28,13 +28,17 @@ export class RecipesComponent implements OnInit {
 
 
   ngOnInit() {
-    this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
-      recipes => {
-        if (recipes !== null) {
-          this.recipes = recipes;
+    if (this.recipesService.filteredRecipes.length === 0) {
+      this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
+        recipes => {
+          if (recipes !== null) {
+            this.recipes = recipes;
+          }
         }
-      }
-    );
+      );
+    } else {
+      this.recipes = this.recipesService.filteredRecipes;
+    }
   }
 
   showRecipe(recipe: any) {

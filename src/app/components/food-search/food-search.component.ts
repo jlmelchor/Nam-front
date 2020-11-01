@@ -1,43 +1,57 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FoodSearchService } from '../../services/food-search.service';
+import { Router } from '@angular/router';
+import {RecipesService} from '../../services/recipes.service';
 
 @Component({
   selector: 'app-food-search',
   templateUrl: './food-search.component.html',
   styleUrls: ['./food-search.component.css']
 })
-export class FoodSearchComponent {
+export class FoodSearchComponent implements OnInit {
 
   public selectedFamily = '--Selecciona categoría--';
-  public Families: Array<any> = [
-    { familyId: 1, name: 'Fruta', ingredients: [ {ingredientId: 1, name: 'Naranja'},
-        {ingredientId: 2, name: 'Fresa'}, {ingredientId: 3, name: 'Manzana'}, {ingredientId: 4, name: 'Plátano'} ] },
-    { familyId: 2, name: 'Verdura', ingredients: [ {ingredientId: 5, name: 'Espinacas'},
-        {ingredientId: 6, name: 'Brócoli'}, {ingredientId: 7, name: 'Coliflor'}, {ingredientId: 8, name: 'Judías verdes'} ] },
-    { familyId: 3, name: 'Hortalizas', ingredients: [ {ingredientId: 9, name: 'Tomate'},
-        {ingredientId: 10, name: 'Pimiento'}, {ingredientId: 11, name: 'Lechuga'}, {ingredientId: 12, name: 'Pepino'} ] },
-    { familyId: 4, name: 'Pasta / arroz / legumbres', ingredient: [ {ingredientId: 13, name: 'Lentejas'},
-        {ingredientId: 14, name: 'Macarrones'}, {ingredientId: 15, name: 'Arroz'}, {ingredientId: 16, name: 'Garbanzos'} ] },
-    { familyId: 5, name: 'Carne', ingredients: [ {ingredientId: 17, name: 'Pechuga de pollo'},
-        {ingredientId: 18, name: 'Ternera'}, {ingredientId: 19, name: 'Salchichas'}, {ingredientId: 20, name: 'Pavo'} ] },
-    { familyId: 6, name: 'Pescado', ingredients: [ {ingredientId: 21, name: 'Salmón'},
-        {ingredientId: 22, name: 'Atún'}, {ingredientId: 23, name: 'Sardina'}, {ingredientId: 24, name: 'Cazón'} ] },
-    { familyId: 7, name: 'Conservas', ingredients: [ {ingredientId: 25, name: 'Atún'},
-        {ingredientId: 26, name: 'Sardinas'}, {ingredientId: 27, name: 'Pimientos asados'}, {ingredientId: 28, name: 'Tomate frito'} ] },
-    { familyId: 8, name: 'Lácteos', ingredients: [ {ingredientId: 29, name: 'Yogur'},
-        {ingredientId: 30, name: 'Queso curado'}, {ingredientId: 31, name: 'Leche'}, {ingredientId: 32, name: 'Queso fresco'} ] },
-    { familyId: 9, name: 'Base', ingredients: [ {ingredientId: 33, name: 'Harina'},
-        {ingredientId: 34, name: 'Aceite'}, {ingredientId: 35, name: 'Huevos'}, {ingredientId: 36, name: 'Mantequilla'} ] }
-  ];
-
-  public ingredients: Array<any>;
+  public ingredients = [];
+  public ingredientsFiltered = [];
+  public families = [];
   public foodList = [];
+  formData: any = new FormData();
   selectable = true;
   removable = true;
 
-  constructor( ){}
+  constructor(
+    private foodSearchService: FoodSearchService,
+    private router: Router,
+    private recipesService: RecipesService
+  ){ }
+
+  ngOnInit(): void {
+    this.foodSearchService.getIngredients().subscribe(
+      ingredients => {
+        if (ingredients !== null) {
+          this.ingredients = ingredients;
+        }
+        for (const ing of this.ingredients) {
+          // this.families.push(ing.)
+        }
+      }
+    );
+    this.foodSearchService.getFamilies().subscribe(
+      families => {
+        if (families !== null) {
+          this.families = families;
+        }
+      }
+    );
+  }
 
   selectFamily(family) {
-    this.ingredients = this.Families.find(fam => fam.name === family).ingredients;
+    this.ingredientsFiltered = [];
+    for (const ing of this.ingredients) {
+      if (ing.family.name === family) {
+        this.ingredientsFiltered.push(ing);
+      }
+    }
   }
 
   selectIng(ing) {
@@ -54,9 +68,15 @@ export class FoodSearchComponent {
 
   submit() {
     if (this.foodList.length !== 0) {
-      console.log(this.foodList);
-      // TODO: Crear servicio, enviar al back la lista de ingredientes y traer las recetas que correspondan
-      // TODO: Después, redirigir a la pantalla con las recetas que coincidan con la búsqueda
+      this.formData.append('foodList', this.foodList);
+      this.foodSearchService.findRecipes(this.formData).subscribe(
+        recipes => {
+          if (recipes !== null) {
+            this.recipesService.filteredRecipes = recipes;
+            this.router.navigate( ['/recipes'] );
+          }
+        }
+      );
     }
   }
 }

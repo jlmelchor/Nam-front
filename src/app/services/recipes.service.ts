@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class RecipesService {
 
+  public filteredRecipes = [];
+
   constructor(
     private httpClient: HttpClient
   ) { }

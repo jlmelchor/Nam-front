@@ -6,23 +6,27 @@
   </div>
 
   <div class="col-md-8">
-    <h5 class="card-title">Ingredientes</h5>
-    <span class="badge badge-pill badge-info mr-3" *ngFor="let ing of recipe.ingredients">
+    <h4 class="card-title"><b>Ingredientes</b></h4>
+    <h3>
+      <span class="badge badge-pill badge-info mr-3" *ngFor="let ing of recipe.ingredients">
       {{ ing.name }}
-    </span>
+      </span>
+    </h3>
     <hr>
-    <h5 class="card-title">Etiquetas</h5>
-    <span class="badge badge-pill mr-3 glutenFree" *ngIf="glutenFree === true">
+    <h4 class="card-title"><b>Etiquetas</b></h4>
+    <h3>
+      <span class="badge badge-pill mr-3 glutenFree" *ngIf="glutenFree === true">
       Sin gluten
-    </span>
-    <span class="badge badge-pill mr-3 vegetarian" *ngIf="vegetarian === true">
-      Apta para vegetarianos
-    </span>
-    <span class="badge badge-pill mr-3 vegan" *ngIf="vegan === true">
-      Apta para veganos
-    </span>
+      </span>
+      <span class="badge badge-pill mr-3 vegetarian" *ngIf="vegetarian === true">
+        Apta para vegetarianos
+      </span>
+      <span class="badge badge-pill mr-3 vegan" *ngIf="vegan === true">
+        Apta para veganos
+      </span>
+    </h3>
     <hr>
-    <h5 class="card-title">Descripción</h5>
+    <h4 class="card-title"><b>Descripción</b></h4>
     <p class="card-text">
       {{ recipe.description }}
     </p>

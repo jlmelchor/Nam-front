@@ -8,14 +8,15 @@
     <div class="card-container">
       <select placeholder="Selecciona categoría" [(ngModel)]="selectedFamily" (change)="selectFamily($event.target.value)" class="btn btn-info dropdown-toggle">
         <option>--Selecciona categoría--</option>
-        <option *ngFor="let family of Families">{{family.name}}</option>
+        <option *ngFor="let family of families">{{family.name}}</option>
       </select>
     </div>
 
     <div class="card-container">
       <select placeholder="Selecciona ingredientes" class="btn btn-outline-info dropdown-toggle" (change)="selectIng($event.target.value)">
         <option>--Selecciona ingredientes--</option>
-        <option *ngFor="let ingredient of ingredients">{{ingredient.name}}</option>
+        <option *ngFor="let ingredient of ingredientsFiltered">{{ingredient.name}}</option>
+        <!-- <option *ngFor="let ingredient of ingredientsFiltered">{{ingredient.name}}</option> -->
       </select>
     </div>
 

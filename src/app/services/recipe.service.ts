@@ -16,7 +16,6 @@ export class RecipeService {
   ) { }
 
   addFav(formData): Observable<any> {
-    console.log('ha entrado');
     return this.httpClient.post('http://localhost:8080/addFav', formData, {
       headers: new HttpHeaders({'Access-Control-Allow-Origin' : '*'})
     }).pipe(map(data => data));
