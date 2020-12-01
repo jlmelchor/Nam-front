@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from '../../services/recipes.service';
-import { Router } from '@angular/router';
-import { RecipeService } from '../../services/recipe.service';
-import { LoginService } from '../../services/login.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { RecipesService } from '../../services/recipes.service';
+import { RecipeService } from '../../services/recipe.service';
+import { Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {AddRecipeModalComponent} from './add-recipe-modal/add-recipe-modal.component';
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css']
+  selector: 'app-recipes-book',
+  templateUrl: './recipes-book.component.html',
+  styleUrls: ['./recipes-book.component.css']
 })
-export class RecipesComponent implements OnInit {
+export class RecipesBookComponent implements OnInit {
 
   public recipes = [];
+  public recipesFav = [];
   public formData: any = new FormData();
   public form = new FormGroup({
     email: new FormControl(''),
@@ -23,21 +25,25 @@ export class RecipesComponent implements OnInit {
     private recipesService: RecipesService,
     private recipeService: RecipeService,
     private router: Router,
-    private loginService: LoginService
+    private readonly matDialog: MatDialog
   ) { }
 
 
   ngOnInit() {
-    if (this.recipesService.filteredRecipes.length === 0) {
-      this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
-        recipes => {
-          if (recipes !== null) {
-            this.recipes = recipes;
-          }
+    this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
+      recipes => {
+        if (recipes !== null) {
+          this.getRecipesFav(recipes);
         }
-      );
-    } else {
-      this.recipes = this.recipesService.filteredRecipes;
+      }
+    );
+  }
+
+  getRecipesFav(recipes) {
+    for (const recipe of recipes) {
+      if (recipe.isFav === 'Y') {
+        this.recipesFav.push(recipe);
+      }
     }
   }
 
@@ -54,7 +60,7 @@ export class RecipesComponent implements OnInit {
         if (recipe !== null) {
           this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
             recipes => {
-              this.recipes = recipes;
+              this.recipesFav = recipes;
               this.formData = new FormData();
             }
           );
@@ -71,12 +77,31 @@ export class RecipesComponent implements OnInit {
         if (recipe !== null) {
           this.recipesService.getRecipes(+sessionStorage.getItem('userId')).subscribe(
             recipes => {
-              this.recipes = recipes;
+              this.recipesFav = recipes;
               this.formData = new FormData();
             }
           );
         }
       }
     );
+  }
+
+  openAddRecipeModal(): void {
+    const modalFeatures = {
+      width: '840px',
+      height: 'auto',
+      disableClose: true,
+      panelClass: 'my-dialog'
+    };
+    const dialogRef = this.matDialog.open(AddRecipeModalComponent, modalFeatures);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.ngOnInit();
+      }
+    });
+  }
+
+  goAddRecipePage(): void {
+    this.router.navigate( ['/add-recipe'] );
   }
 }

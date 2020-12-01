@@ -1,0 +1,100 @@
+<button mat-button class="close" [mat-dialog-close]="true">
+  <mat-icon>close</mat-icon>
+</button>
+<h1 mat-dialog-title class="ml-4">Añadir receta</h1>
+<mat-dialog-content>
+  <mat-horizontal-stepper labelPosition="bottom" #stepper class="stepper">
+
+    <!-- 1. NAME -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Nombre</ng-template>
+        <mat-form-field>
+          <mat-label>Nombre de la receta</mat-label>
+          <input matInput required formControlName="name">
+        </mat-form-field>
+        <hr>
+        <div class="buttons">
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- 2. INGREDIENTS -->
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Ingredientes</ng-template>
+
+        <div class="card-container">
+          <select placeholder="Selecciona categoría" (change)="selectFamily($event.target.value)" class="btn btn-info dropdown-toggle m-2">
+            <option>--Selecciona categoría--</option>
+            <option *ngFor="let family of families">{{family.name}}</option>
+          </select>
+          <mat-selection-list #ingredients formControlName="ingredients">
+            <mat-list-option *ngFor="let ingredient of ingredientsFiltered" [value]=ingredient.name (click)="pushIngredients(ingredient.name)">
+              {{ingredient.name}}
+            </mat-list-option>
+          </mat-selection-list>
+          <hr>
+          <p>
+            Ingredientes seleccionados: {{ingredients.selectedOptions.selected.length}}
+          </p>
+        </div>
+        <hr>
+        <div class="buttons">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- 3. DESCRIPTION -->
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Descripción</ng-template>
+        <mat-form-field appearance="fill" style="width: 750px;">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="10"></textarea>
+        </mat-form-field>
+        <hr>
+        <div class="buttons">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- 4. CATEGORY -->
+    <mat-step [stepControl]="fourthFormGroup">
+      <form [formGroup]="fourthFormGroup">
+        <ng-template matStepLabel>Categoría</ng-template>
+        <p>
+          <mat-label><b>¿A qué categoría pertenece la receta?</b></mat-label>
+        </p>
+        <mat-selection-list #ingredients formControlName="category">
+          <mat-list-option *ngFor="let category of categories" [value]=category.categoryId>
+            {{category.name}}
+          </mat-list-option>
+        </mat-selection-list>
+        <hr>
+        <div class="buttons">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <hr>
+      <div class="buttons">
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button (click)="submit()">Enviar</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>

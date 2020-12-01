@@ -1,0 +1,29 @@
+<h1>Mi libro de recetas | <small>Aquí encontrarás todas tus recetas favoritas y podrás añadir las tuyas propias</small></h1>
+<hr>
+<div class="row mr-1 pb-4">
+  <button type="button" class="btn btn-outline-info ml-auto" (click)="openAddRecipeModal()">Añadir receta</button>
+</div>
+<div class="card-columns animated fadeIn fast">
+  <div class="card" *ngFor="let recipeFav of recipesFav; let i = index">
+    <button mat-icon-button class="button m-2">
+      <mat-icon *ngIf="recipeFav.isFav === 'Y'" color="warn" matTooltip="Quitar de favoritos" (click)="quitFav(recipeFav.recipeId)" matTooltip="Quitar de favoritos">favorite</mat-icon>
+      <mat-icon class="heart" *ngIf="recipeFav.isFav === 'N' || recipeFav.isFav === null" matTooltip="Añadir a favoritos" (click)="addFav(recipeFav.recipeId)" matTooltip="Añadir a favoritos">favorite</mat-icon>
+    </button>
+    <img class="card-img-top img-fluid" src="assets/img/plato.png" alt="Card image cap">
+    <div class="card-body">
+      <h4 class="card-title"><b>{{ recipeFav.name }}</b></h4>
+      <p class="card-text description"> {{ recipeFav.description }} </p>
+      <button type="button" class="btn btn-outline-info" (click)="showRecipe(recipeFav)">
+        Ver más...
+      </button>
+    </div>
+    <div class="card-footer">
+      <h3>
+        <span class="badge badge-pill badge-info mr-3">
+          {{ recipeFav.category.name }}
+        </span>
+      </h3>
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div>

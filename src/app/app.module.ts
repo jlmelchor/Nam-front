@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from 'src/app/components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
-import { HeroeComponent } from './components/heroe/heroe.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
@@ -31,6 +30,15 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { RecipesBookComponent } from './components/recipes-book/recipes-book.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {AddRecipeModalComponent} from './components/recipes-book/add-recipe-modal/add-recipe-modal.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatListModule} from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -38,13 +46,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     NavbarComponent,
     HomeComponent,
     RecipesComponent,
-    HeroeComponent,
     FooterComponent,
     RegistrationComponent,
     LoginComponent,
     GenericModalComponent,
     RecipeComponent,
-    FoodSearchComponent
+    FoodSearchComponent,
+    RecipesBookComponent,
+    AddRecipeModalComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +68,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatIconModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatInputModule,
+    MatStepperModule,
+    MatListModule,
+    MatCheckboxModule
   ],
   providers: [
     RecipesService

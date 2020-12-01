@@ -1,0 +1,24 @@
+.card-deck {
+  margin-top: 3rem;
+}
+
+.description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  float: right;
+}
+
+.heart {
+  color: #EAEDED;
+}
+
+.card-columns {
+  column-count: 3;
+}

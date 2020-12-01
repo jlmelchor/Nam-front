@@ -11,3 +11,7 @@
   background-size: 100% 2px;
   cursor: pointer;
 }
+.card {
+  max-width: 70%;
+  margin: auto;
+}

@@ -1,19 +1,27 @@
-.container {
-  max-width: 960px;
-}
 .header {
   position: relative;
-  overflow: hidden;
+  text-align: right;
   max-height: 300px;
-  padding: 3rem;
-  text-align: center;
+  overflow: hidden;
 }
+
+.title {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.card {
+  border-color: #757575;
+}
+
 .body {
   width: 100%;
 }
-.body {
-  position: relative;
-}
+
 @media (min-width: 768px) {
   .flex-md-equal > * {
     -ms-flex: 1;

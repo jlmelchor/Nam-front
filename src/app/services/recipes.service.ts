@@ -18,6 +18,12 @@ export class RecipesService {
     }).pipe(map(data => data));
   }
 
+  addRecipe(formData: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/recipe', formData, {
+      headers: new HttpHeaders({'Access-Control-Allow-Origin' : '*'})
+    }).pipe(map(data => data));
+  }
+
   /*getRecipe(index: string) {
     return this.recipes[index];
   }

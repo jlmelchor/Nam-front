@@ -29,4 +29,10 @@ export class FoodSearchService {
       headers: new HttpHeaders({'Access-Control-Allow-Origin' : '*'})
     }).pipe(map(data => data));
   }
+
+  getCategories(): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/categories', {
+      headers: new HttpHeaders({'Access-Control-Allow-Origin' : '*'})
+    }).pipe(map(data => data));
+  }
 }
