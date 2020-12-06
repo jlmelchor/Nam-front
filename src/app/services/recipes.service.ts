@@ -23,16 +23,4 @@ export class RecipesService {
       headers: new HttpHeaders({'Access-Control-Allow-Origin' : '*'})
     }).pipe(map(data => data));
   }
-
-  /*getRecipe(index: string) {
-    return this.recipes[index];
-  }
-
-  getRecipeId(recipeId) {
-    for (const recipe of this.recipes) {
-      if (recipe.recipeId === recipeId) {
-        return recipe;
-      }
-    }
-  }*/
 }

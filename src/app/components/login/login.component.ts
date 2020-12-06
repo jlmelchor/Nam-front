@@ -63,23 +63,13 @@ export class LoginComponent implements OnInit {
         } else {
           // Si el usuario no existe, borramos los datos del formulario y mostramos mensaje al usuario
           this.form.reset();
-          // this.openDialog();
           swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Usuario y/o contraseña incorrectos',
-            // footer: '<p>¿No tienes cuenta? Regístrate <a class = "link" (click)="goRegistrationPage()"> aquí</a> </p>'
           });
         }
       }
     );
-  }
-
-  openDialog(): void {
-    /*this.dialog.open(GenericModalComponent, {
-      height: '400px',
-      width: '600px',
-      data: {msg: 'Usuario y/o contraseña incorrectos'}
-    });*/
   }
 }

@@ -2,7 +2,11 @@
 <hr>
 <div class="row">
   <div class="col-md-4">
-    <img class="card-img-top img-fluid" src="assets/img/plato.png" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Lentejas vegetales'" class="card-img-top img-fluid image" src="assets/img/lentejas.jpg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Tortilla de patatas'" class="card-img-top img-fluid image" src="assets/img/tortilla.jpeg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Salmón al horno'" class="card-img-top img-fluid image" src="assets/img/salmon.jpg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Chips de calabacín'" class="card-img-top img-fluid image" src="assets/img/chips.jpg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Salteado de pollo con verduras'" class="card-img-top img-fluid image" src="assets/img/salteado.jpg" alt="Card image cap">
   </div>
 
   <div class="col-md-8">

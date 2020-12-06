@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { RecipesService } from '../../services/recipes.service';
 import { RecipeService } from '../../services/recipe.service';
 import { Router } from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
-import {AddRecipeModalComponent} from './add-recipe-modal/add-recipe-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddRecipeModalComponent } from './add-recipe-modal/add-recipe-modal.component';
 
 @Component({
   selector: 'app-recipes-book',
@@ -99,9 +99,5 @@ export class RecipesBookComponent implements OnInit {
         this.ngOnInit();
       }
     });
-  }
-
-  goAddRecipePage(): void {
-    this.router.navigate( ['/add-recipe'] );
   }
 }

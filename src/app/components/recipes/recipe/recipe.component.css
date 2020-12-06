@@ -9,3 +9,7 @@
 .vegan {
   background-color: #EDBB99;
 }
+
+.image {
+  max-height: 180px;
+}

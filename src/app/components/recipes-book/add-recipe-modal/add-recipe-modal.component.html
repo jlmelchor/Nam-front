@@ -86,15 +86,24 @@
       </form>
     </mat-step>
 
-
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <hr>
-      <div class="buttons">
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button (click)="submit()">Enviar</button>
-      </div>
+    <!-- 5. ATTACH FILE -->
+    <mat-step [stepControl]="fiveFormGroup">
+      <form [formGroup]="fiveFormGroup">
+        <ng-template matStepLabel>Añadir imagen</ng-template>
+        <p>¿Quieres añadir una foto de tu receta?</p>
+        <hr>
+        <div class="dropzone">
+          <input type="file" #fileDropRef id="fileDropRef" class="file" multiple (change)="addFile($event)"/>
+          <img class="image" src="assets/img/upload.png" alt="upload">
+          <h3>Arrastra un archivo aquí</h3>
+          <h3>o</h3>
+          <label class="label" for="fileDropRef">Busca un archivo</label>
+        </div>
+        <div class="buttons">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button (click)="submit()">Enviar</button>
+        </div>
+      </form>
     </mat-step>
   </mat-horizontal-stepper>
 </mat-dialog-content>

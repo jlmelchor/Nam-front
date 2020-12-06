@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RecipesService } from '../../services/recipes.service';
 import { Router } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
-import { LoginService } from '../../services/login.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -22,8 +21,7 @@ export class RecipesComponent implements OnInit {
   constructor(
     private recipesService: RecipesService,
     private recipeService: RecipeService,
-    private router: Router,
-    private loginService: LoginService
+    private router: Router
   ) { }
 
 

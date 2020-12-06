@@ -6,7 +6,11 @@
       <mat-icon *ngIf="recipe.isFav === 'Y'" color="warn" matTooltip="Quitar de favoritos" (click)="quitFav(recipe.recipeId)" matTooltip="Quitar de favoritos">favorite</mat-icon>
       <mat-icon class="heart" *ngIf="recipe.isFav === 'N' || recipe.isFav === null" matTooltip="Añadir a favoritos" (click)="addFav(recipe.recipeId)" matTooltip="Añadir a favoritos">favorite</mat-icon>
     </button>
-    <img class="card-img-top img-fluid" src="assets/img/plato.png" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Lentejas vegetales'" class="card-img-top img-fluid image" src="assets/img/lentejas.jpg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Tortilla de patatas'" class="card-img-top img-fluid image" src="assets/img/tortilla.jpeg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Salmón al horno'" class="card-img-top img-fluid image" src="assets/img/salmon.jpg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Chips de calabacín'" class="card-img-top img-fluid image" src="assets/img/chips.jpg" alt="Card image cap">
+    <img *ngIf="recipe.name === 'Salteado de pollo con verduras'" class="card-img-top img-fluid image" src="assets/img/salteado.jpg" alt="Card image cap">
     <div class="card-body">
       <h4 class="card-title"><b>{{ recipe.name }}</b></h4>
       <p class="card-text description"> {{ recipe.description }} </p>

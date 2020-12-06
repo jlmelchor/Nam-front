@@ -22,3 +22,7 @@
 .card-columns {
   column-count: 3;
 }
+
+.image {
+  max-height: 180px;
+}

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {FoodSearchService} from '../../../services/food-search.service';
-import {RecipesService} from '../../../services/recipes.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FoodSearchService } from '../../../services/food-search.service';
+import { RecipesService } from '../../../services/recipes.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -23,6 +23,9 @@ export class AddRecipeModalComponent implements OnInit {
   fourthFormGroup = new FormGroup({
     category: new FormControl('')
   });
+  fiveFormGroup = new FormGroup({
+    file: new FormControl('')
+  });
   formData: any = new FormData();
 
   public ingredients = [];
@@ -30,8 +33,7 @@ export class AddRecipeModalComponent implements OnInit {
   public families = [];
   public foodList = [];
   public categories = [];
-  selectable = true;
-  removable = true;
+  public files = [];
 
   constructor(
     private foodSearchService: FoodSearchService,
@@ -74,6 +76,9 @@ export class AddRecipeModalComponent implements OnInit {
     this.fourthFormGroup = this.formBuilder.group({
       category: ['', Validators.required]
     });
+    this.fiveFormGroup = this.formBuilder.group({
+      file: ['', Validators.required]
+    });
   }
 
   pushIngredients(ingredientName) {
@@ -82,10 +87,8 @@ export class AddRecipeModalComponent implements OnInit {
     }
   }
 
-  pushCategories(categoryId) {
-    if (!this.fourthFormGroup.value.category.includes(categoryId)) {
-      this.fourthFormGroup.value.category.push(categoryId);
-    }
+  addFile(file) {
+    this.files.push(file);
   }
 
   submit() {
@@ -94,6 +97,7 @@ export class AddRecipeModalComponent implements OnInit {
     this.formData.append('description', this.thirdFormGroup.value.description);
     this.formData.append('category', +this.fourthFormGroup.value.category);
     this.formData.append('userId', +sessionStorage.getItem('userId'));
+    this.formData.append('file', this.files);
 
     this.recipesService.addRecipe(this.formData).subscribe(
       recipe => {
@@ -134,10 +138,6 @@ export class AddRecipeModalComponent implements OnInit {
     }
   }
 
-  selectIng(ing) {
-    this.foodList.push(ing);
-  }
-
   remove(ing): void {
     const index = this.foodList.indexOf(ing);
 
@@ -145,5 +145,4 @@ export class AddRecipeModalComponent implements OnInit {
       this.foodList.splice(index, 1);
     }
   }
-
 }
