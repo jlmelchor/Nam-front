@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { FoodSearchService } from '../../../services/food-search.service';
 import { RecipesService } from '../../../services/recipes.service';
 import swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-recipe-modal',
@@ -38,7 +39,8 @@ export class AddRecipeModalComponent implements OnInit {
   constructor(
     private foodSearchService: FoodSearchService,
     private formBuilder: FormBuilder,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private router: Router
   ) {
   }
 
@@ -97,7 +99,9 @@ export class AddRecipeModalComponent implements OnInit {
     this.formData.append('description', this.thirdFormGroup.value.description);
     this.formData.append('category', +this.fourthFormGroup.value.category);
     this.formData.append('userId', +sessionStorage.getItem('userId'));
-    this.formData.append('file', this.files);
+    if (this.files !== null && this.files !== []) {
+      this.formData.append('file', this.files);
+    }
 
     this.recipesService.addRecipe(this.formData).subscribe(
       recipe => {
@@ -118,6 +122,8 @@ export class AddRecipeModalComponent implements OnInit {
             icon: 'success',
             title: 'Receta añadida'
           });
+          // Redireccionamos al Libro de recetas
+          this.router.navigate( ['/recipes-book'] );
         } else {
           swal.fire({
             icon: 'error',
