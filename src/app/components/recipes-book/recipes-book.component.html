@@ -13,7 +13,8 @@
     <img *ngIf="recipeFav.name === 'Tortilla de patatas'" class="card-img-top img-fluid image" src="assets/img/tortilla.jpeg" alt="Card image cap">
     <img *ngIf="recipeFav.name === 'Salmón al horno'" class="card-img-top img-fluid image" src="assets/img/salmon.jpg" alt="Card image cap">
     <img *ngIf="recipeFav.name === 'Chips de calabacín'" class="card-img-top img-fluid image" src="assets/img/chips.jpg" alt="Card image cap">
-    <img *ngIf="recipeFav.name === 'Salteado de pollo con verduras'" class="card-img-top img-fluid image" src="assets/img/salteado.jpg" alt="Card image cap">    <div class="card-body">
+    <img *ngIf="recipeFav.name === 'Salteado de pollo con verduras'" class="card-img-top img-fluid image" src="assets/img/salteado.jpg" alt="Card image cap">
+    <div class="card-body">
       <h4 class="card-title"><b>{{ recipeFav.name }}</b></h4>
       <p class="card-text description"> {{ recipeFav.description }} </p>
       <button type="button" class="btn btn-outline-info" (click)="showRecipe(recipeFav)">

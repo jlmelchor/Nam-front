@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate( ['/recipes'] );
         } else {
           // Si el usuario no existe, borramos los datos del formulario y mostramos mensaje al usuario
-          this.form.reset();
+          this.formData = new FormData();
           swal.fire({
             icon: 'error',
             title: 'Oops...',
