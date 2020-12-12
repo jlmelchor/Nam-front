@@ -41,7 +41,7 @@ export class RecipesBookComponent implements OnInit {
 
   getRecipesFav(recipes) {
     for (const recipe of recipes) {
-      if (recipe.isFav === 'Y') {
+      if (recipe.isFav === 'Y' || recipe.userId === +sessionStorage.getItem('userId')) {
         this.recipesFav.push(recipe);
       }
     }
@@ -96,6 +96,7 @@ export class RecipesBookComponent implements OnInit {
     const dialogRef = this.matDialog.open(AddRecipeModalComponent, modalFeatures);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.recipesFav = [];
         this.ngOnInit();
       }
     });

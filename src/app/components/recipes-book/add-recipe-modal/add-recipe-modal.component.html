@@ -101,7 +101,7 @@
         </div>
         <div class="buttons">
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button (click)="submit()">Enviar</button>
+          <button mat-button (click)="submit()" [mat-dialog-close]="true">Enviar</button>
         </div>
       </form>
     </mat-step>
